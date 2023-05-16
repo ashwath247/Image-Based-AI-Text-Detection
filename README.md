@@ -111,7 +111,7 @@ model.test(dataloader=test_loader)
 
 ### 2. Image approach (Universal Sequence Encoder - ZigZag ResNet)
 
-![alt text](/results/use_model_inference.png)
+![alt text](/results/use_model_inference.jpg)
 
 ### Conclusion
 
