@@ -208,8 +208,7 @@ class Data():
                 labels_.append(1)
 
         # Load the USE Dataset tensors into a custom-defined PyTorch Dataset
-        transform = transforms.Compose([transforms.ToTensor()])
-        dataset = USEDataset(tembeddings, labels_, transform)
+        dataset = USEDataset(tembeddings, labels_)
 
         # Split the USE Dataset to training, testing, and validation sets
         train_set, test_set = torch.utils.data.random_split(dataset, [250000, 50000])

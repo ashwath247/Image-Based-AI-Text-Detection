@@ -88,6 +88,7 @@ class Data():
         arrs = []
         arr_lens = []
 
+        mini_itr = 1
         # Iterating over the paragraph
         for i in range(len(paragraph)):
 
@@ -163,12 +164,18 @@ class Data():
 
         # Create the Image Directory if not present
         try:
+            os.mkdir(f"{self.images_dir}")
+        except:
+            pass
+        try:
             os.mkdir(f"{self.images_dir}/{name}")
-        except FileExistsError:
+        except:
             pass
 
         # Create an instance of the POSTags class.
         self.pos_obj = POSTags()
+
+        itr = 1
 
         # Create a multiprocessing pool.
         with multiprocessing.Pool() as pool:
@@ -199,6 +206,16 @@ class Data():
 
         # Set the data store path.
         self.data_store_path = folder_path
+
+        # Create the Data Store Directory if not present
+        try:
+            os.mkdir(f"{self.data_store_path}")
+        except:
+            pass
+        try:
+            os.mkdir(f"{self.data_store_path}/batches/")
+        except:
+            pass
 
         # Define the transform to apply on the images.
         transform = transforms.Compose([transforms.Resize((50, 50)), transforms.ToTensor()])
