@@ -12,7 +12,7 @@
 
 https://huggingface.co/datasets/Hello-SimpleAI/HC3/blob/main/README.md
 
-Please download the HC3.csv and place in the data directory before training.
+Please download the hc3.csv and place in the data directory before training.
 
 Using Parts of Speech (POS) Method
 ```
