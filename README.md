@@ -83,7 +83,7 @@ that the ZigZag model outperformed other architectures in terms of accuracy.
 ### 2. Image approach (Universal Sequence Encoder - ZigZag ResNet)
 
 #### Accuracy Plot
-![alt text](/results/use_embedding_resnet_accuracy_plot.png)
+![alt text](/results/use_embedding_resnet_accuracy_plot.jpg)
 
 #### Inference
 ![alt text](/results/use_model_inference.jpg)
