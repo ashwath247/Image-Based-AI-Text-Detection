@@ -275,3 +275,45 @@ class USEDataset(Dataset):
         label = torch.tensor(label)
 
         return tensor, label
+    
+class USEInferenceDataset(Dataset):
+    """
+    Universal Sentence Encoder Dataset for Inference
+    """
+    def __init__(self, data):
+        """
+        USEInferenceDataset init
+
+        Parameters
+        ----------
+        data: torch.Tensor
+            An array of user text converted to scaled USE Embeddings
+        """
+        self.data = data
+
+    def __len__(self):
+        """
+        Returns
+        -------
+            Number of samples in the USEDataset.
+
+        """
+        return len(self.data)
+    
+    def __getitem__(self, index):
+        """
+        Function to get the sample in USEInferenceDataset at a particular index.
+
+        Parameters
+        ----------
+        index: int
+            Index of the sample desired.
+        
+        Returns
+        -------
+        tensor: torch.Tensor
+            Scaled USE-embedding tensor array at the index.
+        """
+        # Convert the sublist to a PyTorch tensor
+        tensor = torch.tensor(self.data[index])
+        return tensor

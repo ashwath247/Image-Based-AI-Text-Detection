@@ -457,6 +457,10 @@ class POSTags:
         -------
         pos_tags: list(int)
             POS-tag embedding array for the given sentence.
+
+        len_pos: int
+            Length of POS Tag array.
+
         """
 
         # Tokenize the sentence into words and POS tags.
@@ -467,5 +471,6 @@ class POSTags:
 
         # Remove any POS tags that are not defined.
         pos_tags = [pos_tag_ for pos_tag_ in pos_tags if pos_tag_ != 0]
+        len_pos = len(pos_tags)
 
-        return pos_tags
+        return pos_tags, len_pos
