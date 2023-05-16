@@ -51,7 +51,7 @@ class Inference():
             sentiment = self.get_sentiment(text)
             print(f"Sentiment: {sentiment}")
 
-    def get_sentiment(self, user_input):
+    def get_sentiment(self, user_input, use_gpu = True):
         """
         Function to get the sentiment of the User Prompt
 
@@ -59,6 +59,9 @@ class Inference():
         ----------
         user_input: str
             User Input prompt, minimum 3 sentences.
+
+        use_gpu: bool
+            Whether to use GPU for inference.
 
         Returns
         -------
@@ -80,7 +83,10 @@ class Inference():
             dataloader = DataLoader(dataset, batch_size=1, shuffle=True)
 
             # Check if CUDA is available and use GPU if possible
-            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            if use_gpu:
+                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            else:
+                device = torch.device('cpu')
 
             # Evaluate the model
             self.model.to(device)
