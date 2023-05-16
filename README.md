@@ -3,10 +3,38 @@
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 
 ## Team Members: 
-### Suriya Prakash Jambunathan (sj3828), NYU
-### Ashwath Shankarnarayan (as16494), NYU
-### Shubham Rajesh Halyal (srh9534), NYU
+##### Suriya Prakash Jambunathan (sj3828)
+##### Ashwath Shankarnarayan (as16494)
+##### Shubham Rajesh Halyal (srh9534)
+#### Department of Electrical and Computer Engineering, New York University, Tandon School of Engineering
 
+## Training and Testing on HC3 Data
+
+https://huggingface.co/datasets/Hello-SimpleAI/HC3/blob/main/README.md
+
+Please download the HC3.csv and place in the data directory before training.
+
+Using Parts of Speech (POS) Method
+```
+python3 main.py --method POS --train --num_epochs 100
+```
+
+Using Universal Sentence (USE) Method
+```
+python3 main.py --method USE --train --num_epochs 100
+```
+
+## Model Inference
+
+Using Parts of Speech (POS) Method
+```
+python3 main.py --method POS --model_path './model_store/best_pos_model.pth' --infer
+```
+
+Using Universal Sentence (USE) Method
+```
+python3 main.py --method USE --model_path './model_store/best_use_model.pth' --infer
+```
 
 ## Why Image Approach over Text
 
@@ -15,7 +43,6 @@
 3. A lot of image classification models have better and consistent accuracy scores
 4. Less Training time for image classification models
 5. Observe the spatial relation between the sentences.
-
 
 ## Model details
 
@@ -43,66 +70,6 @@ that the ZigZag model outperformed other architectures in terms of accuracy.
 
 ![alt text](/results/text_embedding_use_sample.png)
 
-## Training and Testing on HC3 Data
-
-https://huggingface.co/datasets/Hello-SimpleAI/HC3/blob/main/README.md
-
-```
-from model import Model
-from data_pos import Data as POSData
-from data_use import Data as USEData
-from torch.utils.data import DataLoader
-
-use_data = 'use'
-
-if use_data == 'pos':
-    # Initialize Data object with the CSV file name
-    data_obj = POSData(csv_name='./data/HC3.csv')
-
-    # Save POS tagged images for the 'ai' category
-    data_obj.save_pos_tagged_images('ai', images_dir='./data/numsent_3/')
-
-    # Save POS tagged images for the 'human' category
-    data_obj.save_pos_tagged_images('human', images_dir='./data/numsent_3/')
-
-    # Save torch data batches to the specified folder path
-    data_obj.save_torch_data_batches(folder_path='./data/numsent_3/batches/')
-
-    # Get train, test, and validation datasets
-    train_set, test_set, val_set = data_obj.get_train_test_val_data()
-
-    # Initialize the model
-    model = Model('zigzag_resnet')
-
-elif use_data == 'use':
-    # Initialize Data object with the CSV file name
-    data_obj = USEData(csv_name='./data/HC3.csv')
-
-    # Get train, test, and validation datasets
-    train_set, test_set, val_set = data_obj.get_train_test_val_data()
-
-    # Initialize the model
-    model = Model('text_resnet')
-
-# Set the batch size
-batch_size = 32
-
-# Create a DataLoader for the training set to handle batch loading and shuffling
-train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, pin_memory=False)
-
-# Create a DataLoader for the validation set
-valid_loader = DataLoader(val_set, batch_size=batch_size, shuffle=True, pin_memory=False)
-
-# Create a DataLoader for the test set
-test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=False, pin_memory=False)
-
-# Train the model for the specified number of epochs using the training and validation loaders
-model.train(num_epochs=100, train_loader=train_loader, val_loader=valid_loader)
-
-# Test the trained model using the test loader
-model.test(dataloader=test_loader)
-
-```
 ## Results 
 
 ### 1. Text approach (BERT) 
@@ -117,16 +84,3 @@ model.test(dataloader=test_loader)
 
 First, we trained a BERT-based model on the HC3 dataset, and achieved an impressive test accuracy of 99%. This indicates that the BERT model effectively learned the patterns and features in the dataset, leading to highly accurate predictions. Next, we explored an image-based approach using a CNN model. The CNN model was trained on the HC3 dataset, and achieved a test accuracy of 93-94% within the dataset. However, we observed that the CNN model did not generalize well to data points outside of the dataset. This limitation can be attributed to the lack of variety in the data points used for training the model.Finally, we investigated
 the performance of the ResNet model with USE encoder. The ResNet model demonstrated excellent performance and generalization, achieving a test accuracy of 97%. In conclusion, our novel approach of using our modified ResNet with the Universal Sequence Encoder has performed very well and generalized very well on outside points as well. This approach is better than the traditional BERT model since the inference time and train times are much faster than the BERT model. It takes around 40 minutes to train one epoch on the BERT model. At the same time our modified ResNet trains within 1 minute for one epoch and
-
-
-## Inference on custom text
-
-### Parts of Speech
-```
-python3 inference_pos.py
-```
-
-### Universal Sentence Encoder
-```
-python3 inference_use.py
-```
