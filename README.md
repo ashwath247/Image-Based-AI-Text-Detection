@@ -74,10 +74,18 @@ that the ZigZag model outperformed other architectures in terms of accuracy.
 
 ### 1. Text approach (BERT) 
 
+#### Accuracy Plot
+![alt text](/results/BERT_accuracy_plt.png)
+
+#### Inference
 ![alt text](/results/bert_model_inference.jpg)
 
 ### 2. Image approach (Universal Sequence Encoder - ZigZag ResNet)
 
+#### Accuracy Plot
+![alt text](/results/use_embedding_resnet_accuracy_plot.png)
+
+#### Inference
 ![alt text](/results/use_model_inference.jpg)
 
 ### Conclusion
